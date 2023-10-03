@@ -1,7 +1,7 @@
 variable "repo_url" {
   description = "The URL of the git repository to clone"
   type        = string
-  default     = "https://github.com/your-default-repo.git"  # Optional default value
+  default     = "https://github.com/<YOUR_GH_USERNAME>/stream-processing-template.git"  # Optional default value
 }
 
 provider "aws" {
