@@ -3,10 +3,8 @@ variable "gh_user" {
   type        = string
 }
 
-variable "repo_url" {
-  description = "The URL of the git repository to clone"
-  type        = string
-  default     = "https://github.com/${var.gh_user}/stream-processing-template.git"  # Optional default value
+locals {
+  repo_url = "https://github.com/${var.gh_user}/stream-processing-template.git"
 }
 
 variable "key_name" {
@@ -38,12 +36,12 @@ resource "aws_instance" "msk_client" {
               
               
               # Clone the git repository
-              git clone ${var.repo_url} /home/ec2-user/stream-processing-template
+              git clone ${local.repo_url} /home/ec2-user/stream-processing-template
               EOF
 
 
   tags = {
-    Name = "${var.git_username}MSKClient"
+    Name = "${var.gh_user}-MSKClient"
   }
 
     
