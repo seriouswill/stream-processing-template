@@ -1,7 +1,7 @@
 
 # STREAM PROCESSING TEMPLATE
 
-### Intro
+## Intro
 
 This repo is designed for you to fork and clone locally and onto your EC2 instance.
 
@@ -9,7 +9,9 @@ Make a note of the `.git` url for example:
 
 > `https://github.com/<YOUR_GH_USERNAME>/stream-processing-template.git`
 
-### EC2 Key-Pair
+___
+
+## EC2 Key-Pair
 
 You will need a local key in order to sucessfully SSH into your EC2 once it has been built. The quickest and easiest way to do this is to sign into the AWS console - [click here.](console.aws.amazon.com/console)
 
@@ -21,7 +23,7 @@ Click on `new key pair`, and you should see this popup:
 
 ![key pair type](./assets/create_key_2.png)
 
-Once you have given it an adequate name, and made sure to select the `.pem` version, it will download to your Downloads folder most likely. Move it to somewhere more appropriate, like the folder above this repo, or somewhere in your Projects folder - **NOT IN A REPOSITORY**
+Once you have given it an adequate name, and made sure to select the `.pem` version, it will download to your Downloads folder most likely. Move it to somewhere more appropriate, like the folder above this repo, or somewhere in your Projects folder - <span style="color:red">**NOT IN A REPOSITORY**</span>.
 
 Open a terminal at that location and run the following command to make the key private:
 
@@ -31,11 +33,13 @@ chmod 400 wills-example-example-keys.pem
 
 Now that key will be able to be used to SSH into your EC2. The location of the key is where you should execute any SSH command that requires it's use!
 
-**IMPORTANT!**
+<span style="color:red">**IMPORTANT!**</span>
 
-DO NOT add your key to your repo. Your key is private, and should not be in the same folder as this. Please do not add your key to any repo, local or otherwise - scammers and hackers can rack up thousands by scraping GitHub for keys.
+<span style="color:#FFCCCB">**DO NOT** add your key to your repo. Your key is private, and should not be in the same folder as this. Please do not add your key to any repo, local or otherwise - scammers and hackers can rack up thousands by scraping GitHub for keys!</span>
 
-### Terraform Steps
+___
+
+## Terraform Steps
 
 The repo provides a Terraform script for you run that will create your EC2 instance, complete with a clone of this repo (for you to run the Kafka Consumer), and all the necessary libraries.
 
@@ -72,7 +76,9 @@ instance_public_ip = "xx.xx.xxx.xx"
 
 That public IP address is how we will connect to that EC2 in the next step.
 
-### SSH into the EC2
+__
+
+## SSH into the EC2
 
 The final step is to SSH into your EC2 instance. you can do this with the following command, being sure to replace the example `your-key-name` and the `x`s with your actual key name, and your actual public EC2 ip:
 
