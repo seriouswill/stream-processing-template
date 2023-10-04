@@ -1,5 +1,5 @@
 variable "gh_user" {
-  description = "Name of key for GitHub user to access the url"
+  description = "Name of GitHub user to access the url"
   type        = string
 }
 
