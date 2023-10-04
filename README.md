@@ -39,7 +39,10 @@ Now that key will be able to be used to SSH into your EC2. The location of the k
 ```
 
 ``` diff
-- DO NOT add your key to your repo. Your key is private, and should not be in the same folder as this. Please do not add your key to any repo, local or otherwise - scammers and hackers can rack up thousands by scraping GitHub for keys!
+- DO NOT add your key to your repo. 
+- Your key is private, and should not be in the same folder as this. 
+- Please do not add your key to any repo, local or otherwise - scammers and hackers can rack up thousands 
+- by scraping GitHub for keys!
 ```
 ___
 
