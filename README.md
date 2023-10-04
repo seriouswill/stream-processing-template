@@ -9,14 +9,81 @@ Make a note of the `.git` url for example:
 
 > `https://github.com/<YOUR_GH_USERNAME>/stream-processing-template.git`
 
+### EC2 Key-Pair
+
+You will need a local key in order to sucessfully SSH into your EC2 once it has been built. The quickest and easiest way to do this is to sign into the AWS console - [click here.](console.aws.amazon.com/console)
+
+Once logged in, head to the EC2 Service page. Launch a new instance, and scroll down skipping all the steps until you see the `Key pair (login)` section:
+
+![key pair](./assets/create_key_pair.png)
+
+Click on `new key pair`, and you should see this popup:
+
+![key pair type](./assets/create_key_2.png)
+
+Once you have given it an adequate name, and made sure to select the `.pem` version, it will download to your Downloads folder most likely. Move it to somewhere more appropriate, like the folder above this repo, or somewhere in your Projects folder - **NOT IN A REPOSITORY**
+
+Open a terminal at that location and run the following command to make the key private:
+
+``` bash
+chmod 400 wills-example-example-keys.pem
+```
+
+Now that key will be able to be used to SSH into your EC2. The location of the key is where you should execute any SSH command that requires it's use!
+
+**IMPORTANT!**
+
+DO NOT add your key to your repo. Your key is private, and should not be in the same folder as this. Please do not add your key to any repo, local or otherwise - scammers and hackers can rack up thousands by scraping GitHub for keys.
+
 ### Terraform Steps
 
-Before running the steps to get into the EC2, head to the [`main.tf`](./main.tf) file and make a note of line 4. You should replace the `<YOUR_GH_USERNAME>` bit of the longer `.git` url to your GitHub username in order to automate the clone of your forked version of this repo as the EC2 instance is being created - *the power of Terraform!*
+The repo provides a Terraform script for you run that will create your EC2 instance, complete with a clone of this repo (for you to run the Kafka Consumer), and all the necessary libraries.
+
+In order to run the script, you may need to install Terraform first:
+``` bash
+brew install terraform
+```
+
+Once terraform has been installed, in a terminal where you can see the `main.tf` file, run the commands:
+``` bash
+terraform init
+terraform apply
+```
+
+The script should ask you for your GitHub username, and the name of your EC2 key. If you have forked this repo, it should be set to public and your EC2 should automatically clone the contents into your instance.
+
+> Take a look inside the [`main.tf`](./main.tf) file to see how it interpolated that information.
+
+The script will also ask you for the name of your EC2 key. You should type the name, but without the `.pem` suffix. **For example**, when prompted, you might type in `wills-ec2-kafka-key`.
+
+Type `yes` when it asks if you'd like to make apply the build.
+
+Terraform will then create the EC2 instance, and after 3 minutes or so, perform the necessary commands to clone your repo and install your packages, all automatically - *the power of Terraform!*
+
+You should have some output like this
+
+``` bash
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+instance_public_ip = "xx.xx.xxx.xx"
+```
+
+That public IP address is how we will connect to that EC2 in the next step.
+
+### SSH into the EC2
+
+The final step is to SSH into your EC2 instance. you can do this with the following command, being sure to replace the example `your-key-name` and the `x`s with your actual key name, and your actual public EC2 ip:
+
+``` bash
+ssh -i your-key-name.pem ec2-user@x.xx.xxx.xx
+
+```
 
 Once you have reached the step by way of SSH'ing into your EC2 instance, you should have `GIT` installed. You can check by running the command `git --version` in your EC2 shell.
 
-
-You can then clone your forked version of this repo onto your EC2, and be able to run the Kafka Consumer with `python3 consumer.py`.
+You can then access the clone of your forked version of this repo onto your EC2, and be able to run the Kafka Consumer with `python3 consumer.py`.
 
 If you start seeing some messages with `JSON` data that looks a little like this:
 
