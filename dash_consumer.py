@@ -1,9 +1,6 @@
 from confluent_kafka import Consumer, KafkaError
-import dash
-from dash.dependencies import Output, Input
-import dash_core_components as dcc
-import dash_html_components as html
-import dash_table
+from dash import dcc, html, dash_table, Dash
+from dash.dependencies import Input, Output
 import pandas as pd
 
 # Kafka configuration
@@ -17,7 +14,7 @@ consumer = Consumer(conf)
 consumer.subscribe(['monster-damage'])
 
 # Dash App
-app = dash.Dash(__name__)
+app = Dash(__name__)
 
 app.layout = html.Div([
     dcc.Interval(
