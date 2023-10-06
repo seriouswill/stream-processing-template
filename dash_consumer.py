@@ -1,6 +1,5 @@
 import pandas as pd
 import plotly.express as px
-from pyspark.sql import SparkSession
 from confluent_kafka import Consumer, KafkaError
 import dash
 from dash import dcc, html
@@ -19,9 +18,6 @@ conf = {
 
 consumer = Consumer(conf)
 consumer.subscribe(['monster-damage'])
-
-# Initialize Spark session
-spark = SparkSession.builder.appName("MonsterDamageStream").getOrCreate()
 
 cumulative_df = pd.DataFrame(columns=["country", "total_damage"])
 
@@ -68,10 +64,11 @@ def update_graph(n):
     messages_dict_list = [json.loads(msg) for msg in messages]
 
     # Convert the list of dictionaries to a DataFrame
-    df = spark.createDataFrame(pd.DataFrame(messages_dict_list))
+    df = pd.DataFrame(messages_dict_list)
 
-    # Sum the damage by country
-    grouped_df = df.groupBy("country").agg({"damage": "sum"}).withColumnRenamed("sum(damage)", "total_damage").toPandas()
+    # Sum the damage by country using pandas
+    grouped_df = df.groupby("country").agg({"damage": "sum"}).reset_index()
+    grouped_df.columns = ["country", "total_damage"]
 
     # Update the cumulative dataframe
     for index, row in grouped_df.iterrows():
@@ -83,7 +80,7 @@ def update_graph(n):
     # Convert 'total_damage' column to float before calling nlargest
     cumulative_df['total_damage'] = cumulative_df['total_damage'].astype(float)
 
-    # Get the top 5 countries by damage
+    # Get the top 5 countries by damage using pandas
     top_countries = cumulative_df.nlargest(5, 'total_damage')
     
     fig = px.bar(top_countries, x='country', y='total_damage', title='Top 5 Damaged Countries')
