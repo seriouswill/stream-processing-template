@@ -108,7 +108,7 @@ Then you're on the right track!
 
 ## Example Plotting Solutions
 
-If you head to the [Example Plotting Folder](./example_plotting/), you will see two solutions to plot Country and Damage as they come in from the stream. You can run these locally to see possible solutions for that simple plot, with real time data (you can decrease the polling delay from 10 seconds if you like).
+If you head to the [Example Plotting Folder](./example_plotting/), you will see two solutions to plot Country and Damage as they come in from the endpoint (not the stream itself). You can run these locally to see possible solutions for that simple plot, with real time data (you can decrease the polling delay from 10 seconds if you like).
 
 Running these on your EC2 will cause an error unless your EC2 is using python 3.11. It's a bit of a pain getting python 3.11 up and running with requests, which is why I reccomend using these examples locally.
 
