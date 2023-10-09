@@ -19,22 +19,22 @@ provider "aws" {
 resource "aws_instance" "msk_client" {
   ami             = "ami-0b2287cff5d6be10f" # Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type
   instance_type   = "t2.micro"
+  vpc_security_group_ids = ["sg-097cc69c4394149d2"] # Use the existing security group ID
   key_name        = "${var.key_name}" # Ensure you have this key pair in AWS
   user_data = <<-EOF
               #!/bin/bash
               sudo yum update -y
-              sudo yum install -y python3
-              sudo yum install -y java-1.8.0-openjdk-devel
+              sudo yum install -y python3.11
               sudo yum install -y git
               
               # Install confluent-kafka for Python
               pip3 install confluent-kafka
 
-              # Download and extract Kafka
-              wget https://downloads.apache.org/kafka/3.5.1/kafka_2.12-3.5.1.tgz -P /home/ec2-user/
-              tar -xzf /home/ec2-user/kafka_2.12-3.5.1.tgz -C /home/ec2-user/
-              
-              
+              # Install dash, pandas & plotly too
+              pip3 install plotly
+              pip3 install pandas
+              pip3 install dash
+                            
               # Clone the git repository
               git clone ${local.repo_url} /home/ec2-user/stream-processing-template
               EOF

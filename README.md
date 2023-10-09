@@ -110,8 +110,10 @@ Then you're on the right track!
 
 If you head to the [Example Plotting Folder](./example_plotting/), you will see two solutions to plot Country and Damage as they come in from the endpoint (not the stream itself). You can run these locally to see possible solutions for that simple plot, with real time data (you can decrease the polling delay from 10 seconds if you like).
 
-Running these on your EC2 will cause an error unless your EC2 is using python 3.11. It's a bit of a pain getting python 3.11 up and running with requests, which is why I reccomend using these examples locally.
+Run [the Dash Consumer file](./example_plotting/dash_consumer.py) and go to your EC2 Public IP followed by port 8050 to see the results. The url you should go to will display in your terminal like this: `Dash is running on http://0.0.0.0:8050/`, you will need to replace those 0's with your Public EC2 address (the one terraform Outputs), which is viewable on AWS too.
 
-Future solutions can be run in a Jupyter Notebook [(like the Plotly Example Notebook)](./example_plotting/plotly_express.ipynb), or with a dashboarding service [(like the Dash python file)](./example_plotting/dash_example.py).
+Running the Jupyter Notebook on your EC2 will cause an error unless your EC2 is using python 3.11. It's a bit of a pain getting python 3.11 up and running with requests, which is why I reccomend using these examples locally.
+
+Future solutions can be run in a Jupyter Notebook [(like the Plotly Example Notebook)](./example_plotting/plotly_express.ipynb), or with a dashboarding service [(like the Dash python file)](./example_plotting/dash_local_example.py).
 
 Don't be limited by Plotly, Dash or Matplotlib - if you prefer a different plotting tool, please feel free to employ at your discretion!
