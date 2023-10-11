@@ -34,6 +34,13 @@ resource "aws_instance" "msk_client" {
               pip3 install plotly
               pip3 install pandas
               pip3 install dash
+
+              # install jupyter
+              pip3 install jupyter
+
+              # install the pre-built version of pyspark 
+              # ONLY PRE-BUILT WILL WORK ON T2.micro
+              pip3 install --no-cache-dir pyspark
                             
               # Clone the git repository
               git clone ${local.repo_url} /home/ec2-user/stream-processing-template
