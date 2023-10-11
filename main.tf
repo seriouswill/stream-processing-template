@@ -41,6 +41,9 @@ resource "aws_instance" "msk_client" {
               # install the pre-built version of pyspark 
               # ONLY PRE-BUILT WILL WORK ON T2.micro
               pip3 install --no-cache-dir pyspark
+
+              # install Java
+              sudo amazon-linux-extras install java-openjdk11
                             
               # Clone the git repository
               git clone ${local.repo_url} /home/ec2-user/stream-processing-template
