@@ -1,5 +1,9 @@
 # Starter Pseudocode for Objective One: Hero Generator Creation and Writing to 'hero-damage'
 
+# Use this group.id in your Kafka Conf in order to receive ALL the monster data and not have it split across mulitple users. Use the same input each time and you will retain the offset from the stream.
+user_input = input("Enter your unique name or identifier: ")
+group_id = "consumer-" + user_input
+
 # Dictionaries to define hero specialties and continent modifiers.
 HERO_SPECIALTIES = {
     "Wizard": "INT",
