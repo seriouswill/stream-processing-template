@@ -23,6 +23,32 @@ CONTINENT_MODIFIERS = {
     "Antarctica": "CHA"
 }
 
+#! You are NOT allowed to change the followning function. It is the Hero Damage logic. No cheat codes, no God-mode. This is the damage logic, no tinkering!
+
+def calculate_hero_damage(hero, monster_health, continent_modifier):
+    
+    # Base damage of hero is a percentage of monster's health
+    # e.g., 10% of monster's health
+    damage = 0.1 * monster_health
+    
+    # Hero's specialty based on class
+    hero_modifier = HERO_SPECIALTIES[hero['class']]
+    
+    # Check if hero's specialty matches the continent's modifier (monster's weakness)
+    if hero_modifier == continent_modifier:
+        # Increase damage for matching specialty
+        damage *= random.uniform(0.7, 3)  # 70% to 300% of base damage (so up to 30% of monster's health)
+    else:
+        # Reduce damage if no match
+        damage *= random.uniform(0.3, 0.6)  # 30% to 60% of base damage
+    
+    return damage
+
+# You will need to use this function in your program.
+
+### NO TINKERING WITH THE FUNCTION! ###
+
+
 # Pseudocode:
 
 # 1. Connect to Kafka Consumer for the 'monster-damage' topic.
@@ -30,7 +56,6 @@ CONTINENT_MODIFIERS = {
 #    - Subscribe to 'monster-damage' topic.
 
 # 2. For each incoming message (monster) from Kafka:
-#    - Parse the message to extract monster details (e.g., monster type, location, damage).
 #    - Determine which hero class is best suited to counter the monster based on its location (continent).
 #    - Optionally: Calculate the chance for a critical hit for the chosen hero.
 
