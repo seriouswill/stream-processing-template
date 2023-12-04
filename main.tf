@@ -3,6 +3,11 @@ variable "gh_user" {
   type        = string
 }
 
+variable "aws_user" {
+  description = "Your AWS username (e.g. 'will')"
+  type        = string
+}
+
 locals {
   repo_url = "https://github.com/${var.gh_user}/stream-processing-template.git"
 }
@@ -52,6 +57,7 @@ resource "aws_instance" "msk_client" {
 
   tags = {
     Name = "${var.gh_user}-MSKClient"
+    Owner = var.aws_user
   }
 
     
