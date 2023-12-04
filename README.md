@@ -87,16 +87,35 @@ __
 
 ## SSH into the EC2
 
-The final step is to SSH into your EC2 instance. you can do this with the following command, being sure to replace the example `your-key-name` and the `x`s with your actual key name, and your actual public EC2 ip:
+The final step is to SSH into your EC2 instance. Counter-intuitively, in the `ssh` command, it is always `ec2-user@...`, not your regular `aws` username.
+
+You can do this with the following command, being sure to replace the example `your-key-name` and the `x`s with your actual key name, and your actual public EC2 ip:
 
 ``` bash
 ssh -i your-key-name.pem ec2-user@x.xx.xxx.xx
 
 ```
 
+If successful, you should see the Amazon Linux bird in ASCII and a welcome message, it looks like this:
+
+``` 
+   ,     #_
+   ~\_  ####_        Amazon Linux 2
+  ~~  \_#####\
+  ~~     \###|       AL2 End of Life is 2025-06-30.
+  ~~       \#/ ___
+   ~~       V~' '->
+    ~~~         /    A newer version of Amazon Linux is available!
+      ~~._.   _/
+         _/ _/       Amazon Linux 2023, GA and supported until 2028-03-15.
+       _/m/'           https://aws.amazon.com/linux/amazon-linux-2023/
+
+[ec2-user@ip-xxx-xx-xx-xxx ~]$ 
+```
+
 Once you have reached the step by way of SSH'ing into your EC2 instance, you should have `GIT` installed. You can check by running the command `git --version` in your EC2 shell.
 
-You can then access the clone of your forked version of this repo onto your EC2, and be able to run the Kafka Consumer with `python3 consumer.py`.
+You can then access the clone of your forked version of this repo onto your EC2, navigate through the `stream-processing-template/dnd_monster_examples` folder and be able to run the Kafka Consumer with `python3 monster_damage_consumer.py`.
 
 If you start seeing some messages with `JSON` data that looks a little like this:
 
