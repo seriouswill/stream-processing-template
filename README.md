@@ -83,7 +83,7 @@ instance_public_ip = "xx.xx.xxx.xx"
 
 That public IP address is how we will connect to that EC2 in the next step.
 
-__
+---
 
 ## SSH into the EC2
 
