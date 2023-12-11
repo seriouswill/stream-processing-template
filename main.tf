@@ -23,7 +23,7 @@ provider "aws" {
 
 resource "aws_instance" "msk_client" {
   ami             = "ami-0b2287cff5d6be10f" # Amazon Linux 2 AMI (HVM) - Kernel 5.10, SSD Volume Type
-  instance_type   = "t2.micro"
+  instance_type   = "t2.small"
   vpc_security_group_ids = ["sg-097cc69c4394149d2"] # Use the existing security group ID
   key_name        = "${var.key_name}" # Ensure you have this key pair in AWS
   user_data = <<-EOF
@@ -39,6 +39,7 @@ resource "aws_instance" "msk_client" {
               pip3 install plotly
               pip3 install pandas
               pip3 install dash
+
 
               # install jupyter
               pip3 install jupyter
