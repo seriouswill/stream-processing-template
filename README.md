@@ -13,7 +13,7 @@ ___
 
 ## EC2 Key-Pair
 
-You will need a local key in order to sucessfully SSH into your EC2 once it has been built. The quickest and easiest way to do this is to sign into the AWS console - [click here.](console.aws.amazon.com/console)
+You will need a local key in order to sucessfully SSH into your EC2 once it has been built. The quickest and easiest way to do this is to sign into the AWS console - [click here.](https://console.aws.amazon.com/console)
 
 Once logged in, head to the EC2 Service page. Launch a new instance, and scroll down skipping all the steps until you see the `Key pair (login)` section:
 
